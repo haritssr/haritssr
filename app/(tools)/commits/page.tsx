@@ -20,7 +20,7 @@ import {
 } from "@/utils/commits/commitHistory";
 import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
-export const revalidate = 300;
+export const revalidate = 86_400;
 
 export const metadata = createPageMetadata({
   title: commitsRoute.title,

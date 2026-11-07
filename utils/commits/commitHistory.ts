@@ -7,9 +7,13 @@ import { summarizeCommits } from "./changelogSummary";
 import type { ChangelogResult, ChangelogSelection } from "./changelogTypes";
 import { readCommitHistory } from "./commitsDatabase";
 
+/** Tag that `POST /api/commits/revalidate` expires after an import. */
+export const COMMIT_HISTORY_TAG = "commit-history";
+
 export const getCommitHistory = cache(
   unstable_cache(readCommitHistory, ["turso-commits-v2"], {
-    revalidate: 300,
+    revalidate: 86_400,
+    tags: [COMMIT_HISTORY_TAG],
   })
 );
 

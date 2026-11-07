@@ -197,7 +197,9 @@ export default function CommitsDetailsPage() {
                             {name}
                           </th>
                           <td className="px-3 py-2 align-top whitespace-nowrap">
-                            {name === "Home count" ? "24 hours" : "5 minutes"}
+                            {name === "Browser and CDN"
+                              ? "5 minutes"
+                              : "24 hours"}
                           </td>
                           <td className="px-3 py-2 align-top">{detail}</td>
                         </tr>
@@ -228,8 +230,11 @@ export default function CommitsDetailsPage() {
                       validate without database access.
                     </li>
                     <li>
-                      Imports preserve existing records and do not invalidate
-                      the data or API caches.
+                      Imports preserve existing records. When the refresh
+                      address and secret are configured, a successful import
+                      expires the shared history cache so new commits appear on
+                      the next visit; otherwise the 24-hour cache runs out on
+                      its own.
                     </li>
                     <li>
                       API responses allow another five minutes of stale data

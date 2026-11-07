@@ -72,7 +72,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # Setup and safeguards
 
 - Commit history uses server-only `TURSO_COMMITS_DATABASE_URL` and
-  `TURSO_COMMITS_AUTH_TOKEN`. Import requires a full Git checkout.
+  `TURSO_COMMITS_AUTH_TOKEN`. Import requires a full Git checkout. After a
+  successful import, `sync:commits` expires the site's history cache through
+  `POST /api/commits/revalidate` when `COMMITS_REVALIDATE_URL` (the full route
+  URL) and `COMMITS_REVALIDATE_SECRET` are set; the deployment needs the same
+  secret.
 - Timer uses server-only `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`. Run
   `bun run migrate:timer` before schema deployments; back up first. Importing a
   backup with `bun run migrate:timer path/to/backup.json` or `--local-json` writes

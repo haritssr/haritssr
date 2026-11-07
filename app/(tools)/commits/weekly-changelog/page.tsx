@@ -10,7 +10,7 @@ import { createPageMetadata } from "@/utils/metadata/pageMetadata";
 
 import { buildWeeks, reviewedThrough } from "./data";
 
-export const revalidate = 300;
+export const revalidate = 86_400;
 
 export const metadata = createPageMetadata({
   title: weeklyChangelogRoute.title,

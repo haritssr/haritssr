@@ -118,3 +118,34 @@ try {
 } finally {
   client.close();
 }
+
+// The import is already committed; a failed refresh only delays the site by up
+// to the 24-hour cache, so it warns instead of failing the sync.
+const revalidateUrl = process.env.COMMITS_REVALIDATE_URL;
+const revalidateSecret = process.env.COMMITS_REVALIDATE_SECRET;
+if (
+  revalidateUrl === undefined ||
+  revalidateUrl.length === 0 ||
+  revalidateSecret === undefined ||
+  revalidateSecret.length === 0
+) {
+  console.info(
+    "Site cache not refreshed: set COMMITS_REVALIDATE_URL and COMMITS_REVALIDATE_SECRET to refresh it after imports."
+  );
+} else {
+  try {
+    const response = await fetch(revalidateUrl, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${revalidateSecret}` },
+    });
+    console.info(
+      response.ok
+        ? "Site commit cache refreshed."
+        : `Site cache refresh failed with status ${response.status}; it updates within 24 hours.`
+    );
+  } catch {
+    console.info(
+      "Site cache refresh could not reach the site; it updates within 24 hours."
+    );
+  }
+}
