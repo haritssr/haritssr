@@ -72,7 +72,6 @@ describe("older data still parses", () => {
     expect(parsed).toMatchObject({
       autoplay: true,
       desktopListView: false,
-      pagedTimeline: false,
       followNowTimeline: false,
       durationPresets: DEFAULT_DURATION_PRESETS,
     });
@@ -95,7 +94,6 @@ describe("data shape stays in sync", () => {
       autoplay: true,
       multitask: true,
       desktopListView: true,
-      pagedTimeline: true,
       followNowTimeline: true,
       notificationsEnabled: false,
     });

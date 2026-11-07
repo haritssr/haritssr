@@ -130,7 +130,7 @@ function TimerSettingsControls() {
     "setAutoplay"
   );
   const { tickingEnabled, setTickingEnabled } = useTimerTicking();
-  const { paged, setPaged, follow, setFollow } = useTimelineSettings();
+  const { follow, setFollow } = useTimelineSettings();
   const [permissionFailed, setPermissionFailed] = useState(false);
   const browserPermission = useSyncExternalStore(
     subscribePermission,
@@ -191,16 +191,6 @@ function TimerSettingsControls() {
         disabled={!canUseTimer(snapshot)}
         checked={tickingEnabled}
         onCheckedChange={setTickingEnabled}
-      />
-      <TimerSettingSwitch
-        label="6-hour timeline"
-        title="Show the schedule in 6-hour pages"
-        icon={<ClockIcon aria-hidden="true" className="size-4.5 stroke-2" />}
-        disabled={false}
-        checked={paged}
-        onCheckedChange={(next) => {
-          void setPaged(next);
-        }}
       />
       <TimerSettingSwitch
         label="Follow now"

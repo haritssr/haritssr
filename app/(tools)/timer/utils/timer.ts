@@ -126,8 +126,6 @@ export interface TimerPreferences {
   autoplay: boolean;
   multitask: boolean;
   desktopListView: boolean;
-  /** Shows the schedule in 6-hour pages instead of the whole day. */
-  pagedTimeline: boolean;
   /** Shows a screen-height window that opens on the current time. */
   followNowTimeline: boolean;
   notificationsEnabled: boolean;

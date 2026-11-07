@@ -93,11 +93,11 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/_components/TimelinePager.tsx",
-    "Floating page buttons for the paged timeline and a Now button for the follow-now timeline.",
+    "Floating Back to Now button for the follow-now timeline.",
   ],
   [
     "app/(tools)/timer/hooks/useTimelineWindow.ts",
-    "Selects the whole day or a 6-hour page, and sizes and positions the follow-now scrolling frame.",
+    "Sizes and positions the follow-now scrolling frame and decides when Back to Now shows.",
   ],
   [
     "app/(tools)/timer/utils/timerLocalSetting.ts",
@@ -105,7 +105,7 @@ export const implementationFiles = [
   ],
   [
     "app/(tools)/timer/hooks/useTimelineMode.ts",
-    "Reads and saves the account's 6-hour and Follow now timeline preferences.",
+    "Reads and saves the account's Follow now timeline preference.",
   ],
   [
     "app/(tools)/timer/utils/timelineWindow.ts",

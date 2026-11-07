@@ -39,19 +39,8 @@ export function createTimerController() {
       await mutations.preferences({ multitask }),
     setDesktopListView: async (desktopListView: boolean) =>
       await mutations.preferences({ desktopListView }),
-    // The two timeline modes are exclusive: turning one on turns the other off.
-    setPagedTimeline: async (pagedTimeline: boolean) =>
-      await mutations.preferences(
-        pagedTimeline
-          ? { pagedTimeline, followNowTimeline: false }
-          : { pagedTimeline }
-      ),
     setFollowNowTimeline: async (followNowTimeline: boolean) =>
-      await mutations.preferences(
-        followNowTimeline
-          ? { followNowTimeline, pagedTimeline: false }
-          : { followNowTimeline }
-      ),
+      await mutations.preferences({ followNowTimeline }),
     setNotificationsEnabled: async (notificationsEnabled: boolean) =>
       await mutations.preferences({ notificationsEnabled }),
   };
@@ -59,7 +48,6 @@ export function createTimerController() {
     autoplay: false,
     multitask: false,
     desktopListView: false,
-    pagedTimeline: false,
     followNowTimeline: false,
     notificationsEnabled: true,
     durationPresets: DEFAULT_DURATION_PRESETS,
@@ -78,7 +66,6 @@ export function createTimerController() {
       autoplay: preferences.autoplay,
       multitask: preferences.multitask,
       desktopListView: preferences.desktopListView,
-      pagedTimeline: preferences.pagedTimeline,
       followNowTimeline: preferences.followNowTimeline ?? false,
       notificationsEnabled: preferences.notificationsEnabled,
       durationPresets: preferences.durationPresets,

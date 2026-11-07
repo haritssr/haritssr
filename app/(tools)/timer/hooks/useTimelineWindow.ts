@@ -1,15 +1,7 @@
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import type { RefObject } from "react";
 
-import {
-  FOLLOW_LEAD_MINUTES,
-  HOUR_REM,
-  PAGE_COUNT,
-  PAGE_MINUTES,
-  pageAt,
-  pagePeriod,
-  periodRange,
-} from "../utils/timelineWindow";
+import { FOLLOW_LEAD_MINUTES, HOUR_REM } from "../utils/timelineWindow";
 import { allDayPeriod, scheduledPeriod, timerDayBounds } from "../utils/timer";
 import type { Period, TimerTask } from "../utils/timer";
 import useTimelineMode from "./useTimelineMode";
@@ -20,10 +12,8 @@ interface TimelinePagerStep {
 }
 
 export interface TimelinePagerState {
-  previous: TimelinePagerStep | null;
-  /** Returns to the current time, or null when not applicable. */
+  /** Scrolls back to the current time, or null when the line is on screen. */
   now: TimelinePagerStep | null;
-  next: TimelinePagerStep | null;
 }
 
 /** The scrolling frame of the follow-now timeline. */
@@ -33,6 +23,9 @@ export interface TimelineScroll {
   /** Available screen height, in pixels. */
   height: number;
 }
+
+/** Stable between renders so gesture effects keep running. */
+const WHOLE_DAY = allDayPeriod();
 
 /** Top margin of the full-day timeline inside the scroll frame, in rem. */
 const TOP_MARGIN_REM = 0.75;
@@ -99,10 +92,9 @@ function scrollTopFor(minute: number) {
 }
 
 /**
- * Chooses the minutes the schedule shows and how it scrolls. The whole day is
- * always rendered; the 6-hour setting shows one page at a time, and the
- * follow-now setting scrolls the full day inside the available screen height,
- * opening just before the current time.
+ * Chooses how the schedule scrolls. The whole day is always rendered; the
+ * follow-now setting scrolls it inside the available screen height, opening
+ * just before the current time.
  */
 export default function useTimelineWindow(
   tasks: TimerTask[],
@@ -118,9 +110,6 @@ export default function useTimelineWindow(
   const mode = useTimelineMode();
   const ref = useRef<HTMLDivElement>(null);
   const height = useAvailableHeight(ref, mode === "follow");
-  const [choice, setChoice] = useState<{ date: string; page: number } | null>(
-    null
-  );
   // The follow-now frame opens once per date and stays put as time passes.
   const [anchor, setAnchor] = useState({ date, now });
   if (anchor.date !== date) {
@@ -133,7 +122,6 @@ export default function useTimelineWindow(
   );
   const minute = (now - timerDayBounds(date).start) / 60_000;
   const anchorMinute = (anchor.now - timerDayBounds(date).start) / 60_000;
-  const nowPage = pageAt(minute);
   const starts = tasks.flatMap((task) => scheduledPeriod(task)?.from ?? []);
   const firstStart = starts.length === 0 ? null : Math.min(...starts);
   const openMinute =
@@ -141,18 +129,7 @@ export default function useTimelineWindow(
       ? anchorMinute
       : (firstStart ?? 360);
 
-  // Paged mode: one of four 6-hour pages.
-  // Without a current time or tasks, open on the morning-to-noon page.
-  const pageFallback =
-    nowPage ??
-    (firstStart === null ? 1 : Math.floor(firstStart / PAGE_MINUTES));
-  const page = choice?.date === date ? choice.page : pageFallback;
-
-  // Stable between renders so gesture effects keep running.
-  const view = useMemo(
-    () => (mode === "paged" ? pagePeriod(page) : allDayPeriod()),
-    [mode, page]
-  );
+  const view = WHOLE_DAY;
   const openTop = scrollTopFor(openMinute);
   // Scrolls to the opening position whenever the frame mounts, including the
   // swap from the static to the editable timeline.
@@ -180,16 +157,6 @@ export default function useTimelineWindow(
     [openTop]
   );
 
-  if (mode === "paged") {
-    return {
-      view,
-      ref,
-      scroll: null,
-      pager: pagedPager(page, nowPage, (target) => {
-        setChoice({ date, page: target });
-      }),
-    };
-  }
   if (mode === "follow") {
     const inDay = minute >= 0 && minute < 1440;
     // Only offer Now when the red line is scrolled out of the frame.
@@ -201,8 +168,6 @@ export default function useTimelineWindow(
       ref,
       scroll: { attach, height },
       pager: {
-        previous: null,
-        next: null,
         now:
           inDay && !lineVisible
             ? {
@@ -224,31 +189,4 @@ export default function useTimelineWindow(
     };
   }
   return { view, pager: null, ref, scroll: null };
-}
-
-/** Steps between the four 6-hour pages and back to the page holding now. */
-function pagedPager(
-  page: number,
-  nowPage: number | null,
-  select: (page: number) => void
-): TimelinePagerState {
-  const step = (target: number): TimelinePagerStep => ({
-    label: `Show ${periodRange(pagePeriod(target))}${nowPage === target ? ", current time" : ""}`,
-    select: () => {
-      select(target);
-    },
-  });
-  return {
-    previous: page > 0 ? step(page - 1) : null,
-    now:
-      nowPage === null || nowPage === page
-        ? null
-        : {
-            label: `Now, ${periodRange(pagePeriod(nowPage))}`,
-            select: () => {
-              select(nowPage);
-            },
-          },
-    next: page < PAGE_COUNT - 1 ? step(page + 1) : null,
-  };
 }

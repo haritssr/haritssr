@@ -79,7 +79,6 @@ describe("schema", () => {
       "autoplay",
       "multitask",
       "desktop_list_view",
-      "paged_timeline",
       "follow_now_timeline",
       "notifications_enabled",
       "duration_presets",
@@ -100,6 +99,29 @@ describe("schema", () => {
     const before = await columns("timer_preferences");
     await initializeTimerDatabase(client);
     expect(await columns("timer_preferences")).toEqual(before);
+  });
+
+  test("the retired paged_timeline column is dropped", async () => {
+    await client.batch([
+      `CREATE TABLE timer_preferences (
+        id INTEGER PRIMARY KEY CHECK(id = 1), revision INTEGER NOT NULL DEFAULT 0,
+        autoplay INTEGER NOT NULL DEFAULT 0, multitask INTEGER NOT NULL DEFAULT 0,
+        desktop_list_view INTEGER NOT NULL DEFAULT 0,
+        paged_timeline INTEGER NOT NULL DEFAULT 1 CHECK(paged_timeline IN (0, 1)),
+        notifications_enabled INTEGER NOT NULL DEFAULT 1
+      )`,
+      "INSERT INTO timer_preferences(id, revision, autoplay) VALUES (1, 3, 1)",
+    ]);
+
+    await initializeTimerDatabase(client);
+
+    expect(await columns("timer_preferences")).not.toContain("paged_timeline");
+    const state = await timerDatabaseTransaction(
+      async (tx) => await readTimerState(tx, DATE),
+      "read"
+    );
+    expect(state.preferences).toMatchObject({ autoplay: true });
+    expect(state.preferences.revision).toBeGreaterThanOrEqual(3);
   });
 
   test("an old database upgrades in place and keeps its data", async () => {
@@ -134,7 +156,7 @@ describe("schema", () => {
     await initializeTimerDatabase(client);
 
     const upgradedColumns = await columns("timer_preferences");
-    expect(upgradedColumns).toContain("paged_timeline");
+    expect(upgradedColumns).not.toContain("paged_timeline");
     expect(upgradedColumns).toContain("follow_now_timeline");
     const upgraded = await timerDatabaseTransaction(
       async (tx) => await readTimerState(tx, DATE),
@@ -143,7 +165,6 @@ describe("schema", () => {
     expect(upgraded.preferences).toMatchObject({
       autoplay: true,
       multitask: false,
-      pagedTimeline: false,
       followNowTimeline: false,
     });
     expect(upgraded.preferences.revision).toBeGreaterThanOrEqual(4);
@@ -215,7 +236,6 @@ describe("storage round trips", () => {
       autoplay: true,
       multitask: true,
       desktopListView: true,
-      pagedTimeline: true,
       followNowTimeline: true,
       notificationsEnabled: false,
       durationPresets: [60, 120],

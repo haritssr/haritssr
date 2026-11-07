@@ -272,7 +272,6 @@ export const preferencesSchema = z.object({
   autoplay: z.boolean(),
   multitask: z.boolean(),
   desktopListView: z.boolean().default(false),
-  pagedTimeline: z.boolean().default(false),
   followNowTimeline: z.boolean().default(false),
   notificationsEnabled: z.boolean(),
   durationPresets: durationPresetsSchema.default(() => [
@@ -290,7 +289,6 @@ export const preferencesPatchSchema = preferencesSchema
   .omit({
     revision: true,
     desktopListView: true,
-    pagedTimeline: true,
     followNowTimeline: true,
     durationPresets: true,
     taskPresets: true,
@@ -298,7 +296,6 @@ export const preferencesPatchSchema = preferencesSchema
   })
   .extend({
     desktopListView: z.boolean(),
-    pagedTimeline: z.boolean(),
     followNowTimeline: z.boolean(),
     durationPresets: durationPresetsSchema,
     taskPresets: taskPresetsSchema,

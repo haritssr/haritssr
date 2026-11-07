@@ -46,7 +46,6 @@ export function preferences(
     autoplay: false,
     multitask: false,
     desktopListView: false,
-    pagedTimeline: false,
     followNowTimeline: false,
     notificationsEnabled: true,
     durationPresets: [...DEFAULT_DURATION_PRESETS],

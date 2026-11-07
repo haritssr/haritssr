@@ -18,7 +18,7 @@ import { cardTimeRange, timelineTime } from "../utils/timerTime";
 import PastTimeShade from "./PastTimeShade";
 import { EditTask } from "./TaskDialog";
 import { layoutTimelineTasks } from "./timelineLayout";
-import TimelinePager, { TimeOfDayIcon } from "./TimelinePager";
+import TimelinePager from "./TimelinePager";
 
 import styles from "./TaskTimeline.module.css";
 
@@ -61,7 +61,7 @@ export default function TaskTimeline({
   date: string;
   now: number;
   editable: boolean;
-  /** Minutes shown: the whole day, or one 6-hour page. */
+  /** Minutes shown: the whole day. */
   view: Period;
   pager?: TimelinePagerState | null;
   /** Scrolls the full day inside the available screen height. */
@@ -134,18 +134,11 @@ export default function TaskTimeline({
         aria-label="Hourly schedule"
         className="lg:corner-squircle relative isolate flow-root lg:rounded-2xl"
       >
-        {pager === null ? null : (
-          <TimelinePager {...pager} inset={scroll !== null} />
-        )}
-        {span === 1440 ? null : (
-          <span className="text-muted pointer-events-none absolute top-0 left-0 flex h-8.5 w-6 items-center justify-center lg:top-2 lg:left-2.75">
-            <TimeOfDayIcon period={view} className="size-6 shrink-0" />
-          </span>
-        )}
+        {pager === null ? null : <TimelinePager {...pager} />}
         <ScrollFrame scroll={scroll}>
           <div
             ref={interaction?.root}
-            className={`relative mb-4 ml-12 ${span === 1440 ? "mt-3" : "mt-12 lg:mt-14"}`}
+            className="relative mt-3 mb-4 ml-12"
             style={{ height: `${(span / 60) * HOUR_REM}rem` }}
           >
             {editable ? (

@@ -9,7 +9,7 @@ const EditableTaskTimeline = lazy(
   async () => await import("./EditableTaskTimeline")
 );
 
-/** A day's schedule: the whole day, 6-hour pages, or the full day scrolled to the current time. */
+/** A day's schedule: the whole day, or the full day scrolled to the current time. */
 export default function ScheduleTimeline({
   tasks,
   date,
