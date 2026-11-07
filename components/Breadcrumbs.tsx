@@ -54,7 +54,7 @@ export default function Breadcrumbs({
       >
         <li className="flex shrink-0 items-center">
           <Link
-            className="text-foreground/70 hover:text-foreground whitespace-nowrap"
+            className="text-foreground/50 hover:text-foreground whitespace-nowrap"
             href="/"
             prefetch={false}
           >
@@ -79,7 +79,7 @@ export default function Breadcrumbs({
               ) : (
                 <>
                   <Link
-                    className="text-foreground/70 hover:text-foreground whitespace-nowrap"
+                    className="text-foreground/50 hover:text-foreground whitespace-nowrap"
                     href={href}
                     prefetch={false}
                   >
@@ -98,7 +98,7 @@ export default function Breadcrumbs({
 
 function Separator() {
   return (
-    <span aria-hidden="true" className="text-border ml-1">
+    <span aria-hidden="true" className="ml-1">
       /
     </span>
   );
