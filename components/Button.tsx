@@ -83,7 +83,12 @@ const BUTTON_VARIANT_CLASS: Record<ButtonVariant, string> = {
   "neutral-subtle-underlined":
     "gap-0 rounded-none p-0 font-semibold text-foreground underline underline-offset-2 transition-colors duration-150 hover:text-action focus-visible:outline-action",
   "secondary-strong": BUTTON_SECONDARY_CLASS,
-  "floating-secondary": BUTTON_SECONDARY_CLASS,
+  // Hover tints the surface like `outline` and keeps the border; the fill is
+  // opaque so content behind a floating button never shows through.
+  "floating-secondary": BUTTON_SECONDARY_CLASS.replace(
+    "hover:border-border-hover hover:bg-interface-hover",
+    "hover:bg-[color-mix(in_srgb,var(--color-secondary-button-surface)_95%,var(--color-foreground))]"
+  ),
   outline:
     "border-border text-foreground border bg-transparent font-medium transition-colors duration-150 enabled:hover:bg-foreground/5 focus-visible:outline-action",
   "floating-outline":
