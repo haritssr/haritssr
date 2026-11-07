@@ -76,7 +76,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   successful import, `sync:commits` expires the site's history cache through
   `POST /api/commits/revalidate` when `COMMITS_REVALIDATE_URL` (the full route
   URL) and `COMMITS_REVALIDATE_SECRET` are set; the deployment needs the same
-  secret.
+  secret, and the CI update step reads both from repository secrets.
 - Timer uses server-only `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`. Run
   `bun run migrate:timer` before schema deployments; back up first. Importing a
   backup with `bun run migrate:timer path/to/backup.json` or `--local-json` writes

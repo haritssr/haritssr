@@ -53,4 +53,6 @@ jobs:
         env:
           TURSO_COMMITS_DATABASE_URL: ${{ secrets.TURSO_COMMITS_DATABASE_URL }}
           TURSO_COMMITS_AUTH_TOKEN: ${{ secrets.TURSO_COMMITS_AUTH_TOKEN }}
+          COMMITS_REVALIDATE_URL: ${{ secrets.COMMITS_REVALIDATE_URL }}
+          COMMITS_REVALIDATE_SECRET: ${{ secrets.COMMITS_REVALIDATE_SECRET }}
         run: bun run update:data
